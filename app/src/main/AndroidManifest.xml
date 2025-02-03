@@ -13,13 +13,29 @@
         android:theme="@style/Theme.Gamecenter"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".Intro"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".game_2048"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".home_screen"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".game_Mines"
+            android:exported="true">
+
         </activity>
     </application>
 

@@ -3,10 +3,10 @@ package com.example.gamecenter;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
-public class SwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
-    private MainActivity activity;
+public class gestos_2024 extends GestureDetector.SimpleOnGestureListener {
+    private game_2048 activity;
 
-    public SwipeGestureListener(MainActivity activity) {
+    public gestos_2024(game_2048 activity) {
         this.activity = activity;
     }
 
