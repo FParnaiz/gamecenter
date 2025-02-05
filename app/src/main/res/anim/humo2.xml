@@ -5,13 +5,13 @@
     <alpha
         android:fromAlpha="0.0"
         android:toAlpha="1.0"
-        android:duration="2000"
-        android:startOffset="1000"/>
+        android:duration="1000"
+        android:startOffset="1500"/>
     <alpha
         android:fromAlpha="1.0"
         android:toAlpha="0.0"
-        android:duration="2000"
-        android:startOffset="3500"
+        android:duration="1000"
+        android:startOffset="2500"
         />
 
 </set>

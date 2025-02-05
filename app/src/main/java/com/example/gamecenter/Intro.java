@@ -52,7 +52,7 @@ public class Intro extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 startActivity(new Intent(Intro.this,
-                        home_screen.class));
+                        LogIn.class));
                 Intro.this.finish();
             }
 
