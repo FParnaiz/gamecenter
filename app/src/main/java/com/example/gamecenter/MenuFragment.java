@@ -2,6 +2,7 @@ package com.example.gamecenter;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class MenuFragment extends Fragment {
         titulo = getArguments().getString("titulo");
         record = getArguments().getInt("record");
         activity = getArguments().getString("activity");
+        Log.d("MenuFragment", "onCreateView: titulo: " + titulo + " record: " + record + " activity: " + activity);
         usuario = getArguments().getString("usuario");
         if(titulo.equals("Ajustes")){
             TextView tituloTextView = rootView.findViewById(R.id.tituloMenu);
@@ -66,6 +68,7 @@ public class MenuFragment extends Fragment {
             FrameLayout framemenu= rootView.findViewById(R.id.frameMenu);
             framemenu.setOnClickListener(v-> {
                 try {
+                    Log.d("MenuFragment", "onClick: Clicked on " + activity);
                     Class<?> targetActivity = Class.forName("com.example.gamecenter." + activity);
                     Intent intent = new Intent(getActivity(), targetActivity);
                     intent.putExtra("usuario", usuario);

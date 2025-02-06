@@ -34,7 +34,7 @@
             android:name=".home_screen"
             android:exported="true"></activity>
         <activity
-            android:name=".game_Mines"
+            android:name=".game_buscaminas"
             android:exported="true"></activity>
     </application>
 
