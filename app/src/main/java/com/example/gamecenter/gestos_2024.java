@@ -23,7 +23,7 @@ public class gestos_2024 extends GestureDetector.SimpleOnGestureListener {
         if (Math.abs(deltaX) > Math.abs(deltaY) && deltaX > swipeThreshold) {
             // Swipe right: call moverDerecha
             activity.tableroDatos.moverCasillas("d");
-            activity.tableroVisual.dibujarTablero(activity, activity.tableroDatos, R.drawable.ficha2);
+            activity.tableroVisual.dibujarTablero();
             return true;
         }
 
@@ -31,7 +31,7 @@ public class gestos_2024 extends GestureDetector.SimpleOnGestureListener {
         if (Math.abs(deltaX) > Math.abs(deltaY) && deltaX < -swipeThreshold) {
             // Swipe left: call moverIzquierda
             activity.tableroDatos.moverCasillas("a");
-            activity.tableroVisual.dibujarTablero(activity, activity.tableroDatos, R.drawable.ficha2);
+            activity.tableroVisual.dibujarTablero();
             return true;
         }
 
@@ -39,7 +39,7 @@ public class gestos_2024 extends GestureDetector.SimpleOnGestureListener {
         if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > swipeThreshold) {
             // Swipe down: call moverAbajo
             activity.tableroDatos.moverCasillas("s");
-            activity.tableroVisual.dibujarTablero(activity, activity.tableroDatos, R.drawable.ficha2);
+            activity.tableroVisual.dibujarTablero();
             return true;
         }
 
@@ -47,7 +47,7 @@ public class gestos_2024 extends GestureDetector.SimpleOnGestureListener {
         if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < -swipeThreshold) {
             // Swipe up: call moverArriba
             activity.tableroDatos.moverCasillas("w");
-            activity.tableroVisual.dibujarTablero(activity, activity.tableroDatos, R.drawable.ficha2);
+            activity.tableroVisual.dibujarTablero();
             return true;
         }
 

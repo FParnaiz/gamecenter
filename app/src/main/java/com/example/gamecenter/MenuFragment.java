@@ -28,6 +28,7 @@ public class MenuFragment extends Fragment {
         args.putInt("record", record);
         args.putString("activity", activity);
         args.putString("usuario", usuario);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,7 +61,18 @@ public class MenuFragment extends Fragment {
             TextView tituloTextView = rootView.findViewById(R.id.tituloMenu);
             tituloTextView.setText(titulo);
             TextView recordTextView = rootView.findViewById(R.id.recordMenu);
-            recordTextView.setText("Record:"+String.valueOf(record));
+            if(titulo.equals("Buscaminas")){
+                int minutes = record / 60;
+                int seconds = record % 60;
+
+                // Formatear el texto como MM:SS
+                String timeFormatted = String.format("%02d:%02d", minutes, seconds);
+                recordTextView.setText("Record: "+timeFormatted);
+
+            }else {
+                recordTextView.setText("Record: "+String.valueOf(record));
+            };
+
             ImageView imagenMenu = rootView.findViewById(R.id.imagenMenu);
             String nombreImagen = "j_"+titulo.toLowerCase().replace(" ", "_");
             int resID = getResources().getIdentifier(nombreImagen, "drawable", getActivity().getPackageName());
@@ -72,6 +84,8 @@ public class MenuFragment extends Fragment {
                     Class<?> targetActivity = Class.forName("com.example.gamecenter." + activity);
                     Intent intent = new Intent(getActivity(), targetActivity);
                     intent.putExtra("usuario", usuario);
+                    intent.putExtra("titulo", titulo);
+
                     startActivity(intent);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();

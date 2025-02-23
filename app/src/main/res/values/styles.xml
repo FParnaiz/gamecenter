@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Estilo para el Dialog personalizado -->
+    <style name="CustomDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <!-- Fondo del dialog -->
+        <item name="android:background">@color/fondo_arena</item>
+
+        <!-- Colores de texto -->
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+
+        <!-- Otros ajustes de estilo -->
+        <item name="android:padding">16dp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+</resources>
