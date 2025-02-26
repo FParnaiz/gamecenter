@@ -126,10 +126,12 @@ public class LogIn extends AppCompatActivity {
                     }
                     else {
                         Toast.makeText(LogIn.this, "Usuario creado", Toast.LENGTH_SHORT).show();
+
                         Intent intent = new Intent(LogIn.this, home_screen.class);
                         intent.putExtra("username", username);
                         startActivity(intent);
                         finish();
+
                     }
 
                 }
