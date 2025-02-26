@@ -182,14 +182,15 @@ public class DBhelper extends SQLiteOpenHelper {
 
         if (usuario == null) {
             Log.e("DBhelper", "getJuegos: usuario is null!");
-            db.close(); // Cerrar base de datos
+            db.close();
             return new ArrayList<>();
         }
 
-        // Consulta para obtener todos los juegos y sus récords si existen
-        String query = "SELECT juegos.nombre_juego, COALESCE(records.record, 0)"+"" +
-                " AS record FROM juegos LEFT JOIN records ON records.id_juego = juegos._id"+
-                " LEFT JOIN usuarios ON records.id_usuario = usuarios._id AND usuarios.nombre_usuario = ?";
+        // Modified query to correctly handle the JOIN and filter by current user only
+        String query = "SELECT juegos.nombre_juego, " +
+                "(SELECT record FROM records WHERE records.id_juego = juegos._id AND " +
+                "records.id_usuario = (SELECT _id FROM usuarios WHERE nombre_usuario = ?)) AS record " +
+                "FROM juegos";
 
         Cursor cursor = db.rawQuery(query, new String[]{usuario});
         ArrayList<InfoJuego> juegos = new ArrayList<>();
@@ -197,14 +198,15 @@ public class DBhelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 @SuppressLint("Range") String titulo = cursor.getString(cursor.getColumnIndex("nombre_juego"));
-                @SuppressLint("Range") int record = cursor.getInt(cursor.getColumnIndex("record"));
+                @SuppressLint("Range") int record = cursor.isNull(cursor.getColumnIndex("record")) ? 0 :
+                        cursor.getInt(cursor.getColumnIndex("record"));
                 Log.d("DBhelper", "Juego: " + titulo + ", Record: " + record);
                 juegos.add(new InfoJuego(titulo, record, usuario));
             } while (cursor.moveToNext());
         }
 
         cursor.close();
-        db.close(); // Cerrar base de datos
+        db.close();
         return juegos;
     }
 
@@ -329,5 +331,68 @@ public class DBhelper extends SQLiteOpenHelper {
 
         return record;
     }
+
+    public ArrayList<Juego> getListaJuegos() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Juego> listaJuegos = new ArrayList<>();
+
+        String query = "SELECT _id, nombre_juego FROM juegos";
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                @SuppressLint("Range") int idJuego = cursor.getInt(cursor.getColumnIndex("_id"));
+                @SuppressLint("Range") String nombreJuego = cursor.getString(cursor.getColumnIndex("nombre_juego"));
+                listaJuegos.add(new Juego(idJuego, nombreJuego));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close(); // Cerrar la base de datos
+        return listaJuegos;
+    }
+
+    public ArrayList<Record> getRecordsPorJuego(int idJuego) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Record> listaRecords = new ArrayList<>();
+
+        // Obtener el nombre del juego
+        String queryJuego = "SELECT nombre_juego FROM juegos WHERE _id = ?";
+        Cursor cursorJuego = db.rawQuery(queryJuego, new String[]{String.valueOf(idJuego)});
+
+        if (!cursorJuego.moveToFirst()) {
+            cursorJuego.close();
+            db.close();
+            return listaRecords; // Retorna una lista vacía si el juego no existe
+        }
+
+        @SuppressLint("Range") String nombreJuego = cursorJuego.getString(cursorJuego.getColumnIndex("nombre_juego"));
+        cursorJuego.close();
+
+        // Determinar el orden de la consulta
+        String orden = nombreJuego.equalsIgnoreCase("Buscaminas") ? "ASC" : "DESC";
+
+        // Consulta para obtener los récords y los nombres de usuario
+        String query = "SELECT usuarios.nombre_usuario, records.record " +
+                "FROM records " +
+                "INNER JOIN usuarios ON records.id_usuario = usuarios._id " +
+                "WHERE records.id_juego = ? " +
+                "ORDER BY records.record " + orden;
+
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(idJuego)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                @SuppressLint("Range") String nombreUsuario = cursor.getString(cursor.getColumnIndex("nombre_usuario"));
+                @SuppressLint("Range") int puntuacion = cursor.getInt(cursor.getColumnIndex("record"));
+                listaRecords.add(new Record(nombreUsuario, puntuacion));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close(); // Cerrar la base de datos
+        return listaRecords;
+    }
+
 
 }

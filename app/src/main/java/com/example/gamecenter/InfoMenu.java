@@ -1,6 +1,7 @@
 package com.example.gamecenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,10 @@ public class InfoMenu {
         this.context=context;
         db=new DBhelper(context);
         infoMenu=generarInfoMenu();
-        infoMenu.add(new InfoJuego("Ajustes", 0, "Ajustes"));
+        Log.d("InfoMenu", "InfoMenu creado para el usuario: " + usuario);
+        infoMenu.add(new InfoJuego("Records", 0, usuario));
+        infoMenu.add(new InfoJuego("Ajustes", 0, usuario));
+
     }
 
     private ArrayList<InfoJuego> generarInfoMenu() {
@@ -28,9 +32,7 @@ public class InfoMenu {
     public String getUsuario(){
         return usuario;
     }
-    public InfoJuego getJuego(int position){
-        return infoMenu.get(position);
-    }
+
 
 
 }

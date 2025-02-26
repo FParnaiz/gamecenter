@@ -12,35 +12,53 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gamecenter"
         tools:targetApi="31">
+
+        <activity
+            android:name=".Records"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".Ajustes"
             android:exported="true"
-            android:windowSoftInputMode="stateHidden|adjustPan"/>
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".BuscaminasTablero"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".LogIn"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".Intro"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".game_2048"
-            android:exported="true"></activity>
+            android:exported="true"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".home_screen"
-            android:exported="true"></activity>
+            android:exported="true"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".game_buscaminas"
-            android:exported="true"></activity>
+            android:exported="true"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

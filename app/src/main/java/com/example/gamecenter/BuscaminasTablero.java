@@ -76,7 +76,6 @@ public class BuscaminasTablero extends AppCompatActivity {
 
         tablero = findViewById(R.id.tablero);
         tablero.setColumnCount(tablero_size);
-        tablero.setRowCount(tablero_size);
 
         crearTablerovisual();
 

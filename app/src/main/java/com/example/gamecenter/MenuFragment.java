@@ -57,7 +57,23 @@ public class MenuFragment extends Fragment {
             });
 
 
-        }else{
+        } else if (titulo.equals("Records")) {
+            TextView tituloTextView = rootView.findViewById(R.id.tituloMenu);
+            tituloTextView.setText(titulo);
+            ImageView imagenMenu = rootView.findViewById(R.id.imagenMenu);
+            imagenMenu.setImageResource(R.drawable.trophy);
+            TextView recordTextView = rootView.findViewById(R.id.recordMenu);
+            recordTextView.setText("");
+            FrameLayout framemenu= rootView.findViewById(R.id.frameMenu);
+            framemenu.setOnClickListener(v->{
+                Intent intent = new Intent(getActivity(), Records.class);
+                intent.putExtra("usuario", usuario);
+                startActivity(intent);
+            });
+
+        }
+
+         else{
             TextView tituloTextView = rootView.findViewById(R.id.tituloMenu);
             tituloTextView.setText(titulo);
             TextView recordTextView = rootView.findViewById(R.id.recordMenu);
